@@ -6,6 +6,11 @@ from tables import *
 db = SqliteDatabase("models.db")
 
 # product description
+class User(BaseModel):
+    user_id =             ForeignKeyField(Seller_per_product, backref='user_id') 
+    user_name =           CharField()
+    address_data =        CharField()
+    billing_information = CharField()
 
 class BaseModel(Model):
     class Meta:
@@ -13,7 +18,7 @@ class BaseModel(Model):
 
 class Product(BaseModel):
     price_per_unit =     DecimalField(decimal_places = 2,auto_round=True)
-    product_id =         IntegerField(unique=True)
+    product_id =         IntegerField()
     quantity_in_stock =  IntegerField()
     product_name =       CharField()
     description =        CharField()
@@ -36,12 +41,6 @@ class Seller_per_product (BaseModel):
     user_id = IntegerField()
 
 # user description
-
-class User(BaseModel):
-    user_id =             ForeignKeyField(Seller_per_product, backref='user_id') 
-    user_name =           CharField()
-    address_data =        CharField()
-    billing_information = CharField()
 
 # transation description
 
